@@ -260,4 +260,5 @@ if __name__ == "__main__":
         
     print("Addons.xml, Zips and Root index.html generated successfully!")
     
-    # push_to_github()
+    # 4. Envia pro Github
+    push_to_github()
