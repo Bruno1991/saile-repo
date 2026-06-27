@@ -251,19 +251,33 @@ if __name__ == "__main__":
     # 3. Gera addons.xml com todos os pacotes identificados
     build_addons_xml(addon_dirs)
     
-    # Gera index.html na raiz para o File Manager do Kodi
-    root_html = "<!DOCTYPE html>\n<html>\n<head><title>Saile Kodi Repository</title></head>\n<body>\n<h1>Saile Kodi Repository</h1>\n<hr/>\n"
-    for addon_id, version in new_json_versions.items():
-        zip_name = f"{addon_id}-{version}.zip"
-        # Para o Kodi File Manager enxergar, vamos copiar o zip do repo para a raiz
-        if addon_id == "repository.saile":
-            shutil.copy(os.path.join("zips", addon_id, zip_name), zip_name)
-            root_html += f'<a href="{zip_name}">{zip_name}</a><br>\n'
-        else:
-            root_html += f'<a href="zips/{addon_id}/{zip_name}">{zip_name}</a><br>\n'
-    root_html += "</body>\n</html>\n"
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(root_html)
+    # Gera os arquivos index.html recursivos para o Kodi File Manager conseguir navegar
+    def generate_index_html(folder_path, title="Saile Kodi Repository"):
+        html = f"<!DOCTYPE html>\n<html>\n<head><title>{title}</title></head>\n<body>\n<h1>{title}</h1>\n<hr/>\n"
+        
+        # Lista diretórios e arquivos
+        for item in sorted(os.listdir(folder_path)):
+            if item == "index.html" or item.startswith("."):
+                continue
+            item_path = os.path.join(folder_path, item)
+            if os.path.isdir(item_path):
+                html += f'<a href="{item}/">{item}/</a><br>\n'
+                # Gera recursivamente para as subpastas
+                generate_index_html(item_path, title=f"Index of {item}")
+            else:
+                html += f'<a href="{item}">{item}</a><br>\n'
+        
+        html += "</body>\n</html>\n"
+        with open(os.path.join(folder_path, "index.html"), "w", encoding="utf-8") as f:
+            f.write(html)
+    
+    # Remove qualquer zip que tenha ficado na raiz das execuções antigas
+    for f in os.listdir("."):
+        if f.startswith("repository.saile") and f.endswith(".zip"):
+            os.remove(f)
+
+    # Gera a árvore de navegação
+    generate_index_html(".")
         
     print("Addons.xml, Zips and Root index.html generated successfully!")
     
