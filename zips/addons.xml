@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.saile.mc" version="1.0.2" name="Saile IPTV" provider-name="Dev">
+<addon id="plugin.video.saile.mc" version="1.0.3" name="Saile IPTV" provider-name="Dev">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>

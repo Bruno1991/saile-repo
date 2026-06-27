@@ -131,33 +131,33 @@ class AddonInterface:
         xbmcplugin.endOfDirectory(self.handle)
 
     def show_series_seasons(self, series_id):
-    xbmcplugin.setContent(self.handle, 'seasons')
+        xbmcplugin.setContent(self.handle, 'seasons')
 
-    data = api.fetch_xtream(f"action=get_series_info&series_id={series_id}")
+        data = api.fetch_xtream(f"action=get_series_info&series_id={series_id}")
 
-    if not isinstance(data, dict):
-        xbmcgui.Dialog().notification(
-            "Saile IPTV",
-            "Erro ao carregar série",
-            xbmcgui.NOTIFICATION_ERROR,
-            3000
-        )
+        if not isinstance(data, dict):
+            xbmcgui.Dialog().notification(
+                "Saile IPTV",
+                "Erro ao carregar série",
+                xbmcgui.NOTIFICATION_ERROR,
+                3000
+            )
+            xbmcplugin.endOfDirectory(self.handle)
+            return
+
+        episodes_by_season = data.get('episodes', {})
+
+        for season in sorted(episodes_by_season.keys(), key=lambda x: int(x)):
+            self.add_folder(
+                f"Temporada {season}",
+                {
+                    'action': 'series_episodes',
+                    'series_id': series_id,
+                    'season_num': season
+                }
+            )
+
         xbmcplugin.endOfDirectory(self.handle)
-        return
-
-    episodes_by_season = data.get('episodes', {})
-
-    for season in sorted(episodes_by_season.keys(), key=lambda x: int(x)):
-        self.add_folder(
-            f"Temporada {season}",
-            {
-                'action': 'series_episodes',
-                'series_id': series_id,
-                'season_num': season
-            }
-        )
-
-    xbmcplugin.endOfDirectory(self.handle)
 
     def show_series_episodes(self, series_id, season_num):
         xbmcplugin.setContent(self.handle, 'episodes')
