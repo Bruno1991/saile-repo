@@ -51,7 +51,7 @@ class AddonInterface:
             icon=ICON_SYNC
         )
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_live_menu(self):
         if not database.has_data():
@@ -68,7 +68,7 @@ class AddonInterface:
             self.add_folder(cat['name'], {'action': 'live_streams', 'category_id': cat['id']})
 
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_vod_menu(self):
         if not database.has_data():
@@ -85,7 +85,7 @@ class AddonInterface:
             self.add_folder(cat['name'], {'action': 'vod_streams', 'category_id': cat['id']})
 
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_series_menu(self):
         if not database.has_data():
@@ -102,7 +102,7 @@ class AddonInterface:
             self.add_folder(cat['name'], {'action': 'series_list', 'category_id': cat['id']})
 
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_live_streams(self, category_id):
         xbmcplugin.setContent(self.handle, 'videos')
@@ -115,7 +115,7 @@ class AddonInterface:
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle=self.handle, url=url, listitem=li, isFolder=False)
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_vod_streams(self, category_id):
         xbmcplugin.setContent(self.handle, 'movies')
@@ -167,7 +167,7 @@ class AddonInterface:
             )
 
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
 
     def show_series_episodes(self, series_id, season_num):
         xbmcplugin.setContent(self.handle, 'episodes')
@@ -187,4 +187,4 @@ class AddonInterface:
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle=self.handle, url=url, listitem=li, isFolder=False)
         xbmcplugin.endOfDirectory(self.handle)
-        xbmc.executebuiltin('Container.SetViewMode(55)')
+        xbmc.executebuiltin('Container.SetViewMode(54)')
