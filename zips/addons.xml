@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<addons>
+<addon id="plugin.video.saile.mc" version="1.0.0" name="Saile IPTV" provider-name="Dev">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="main.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="pt_BR">Cliente leve para Xtream Codes API</summary>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon
     id="repository.saile"
     name="SAILE Repository"
@@ -32,3 +46,5 @@
     </extension>
 
 </addon>
+
+</addons>
