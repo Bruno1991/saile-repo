@@ -252,18 +252,23 @@ if __name__ == "__main__":
     build_addons_xml(addon_dirs)
     
     # Gera os arquivos index.html recursivos para o Kodi File Manager conseguir navegar
-    def generate_index_html(folder_path, title="Saile Kodi Repository"):
+    def generate_index_html(folder_path, title="Saile Kodi Repository", is_root=False):
         html = f"<!DOCTYPE html>\n<html>\n<head><title>{title}</title></head>\n<body>\n<h1>{title}</h1>\n<hr/>\n"
         
         # Lista diretórios e arquivos
         for item in sorted(os.listdir(folder_path)):
             if item == "index.html" or item.startswith("."):
                 continue
+                
+            # Na raiz, mostrar SOMENTE a pasta 'zips'
+            if is_root and item != "zips":
+                continue
+
             item_path = os.path.join(folder_path, item)
             if os.path.isdir(item_path):
                 html += f'<a href="{item}/">{item}/</a><br>\n'
                 # Gera recursivamente para as subpastas
-                generate_index_html(item_path, title=f"Index of {item}")
+                generate_index_html(item_path, title=f"Index of {item}", is_root=False)
             else:
                 html += f'<a href="{item}">{item}</a><br>\n'
         
@@ -276,8 +281,8 @@ if __name__ == "__main__":
         if f.startswith("repository.saile") and f.endswith(".zip"):
             os.remove(f)
 
-    # Gera a árvore de navegação
-    generate_index_html(".")
+    # Gera a árvore de navegação (apenas zips na raiz)
+    generate_index_html(".", is_root=True)
         
     print("Addons.xml, Zips and Root index.html generated successfully!")
     
