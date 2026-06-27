@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon
+    id="repository.saile"
+    name="SAILE Repository"
+    version="0.9.9"
+    provider-name="Bruno1991">
+
+    <extension point="xbmc.addon.repository">
+
+        <dir>
+
+            <info compressed="false">
+            https://bruno1991.github.io/saile-repo/addons.xml
+            </info>
+
+            <checksum>
+            https://bruno1991.github.io/saile-repo/addons.xml.sha256
+            </checksum>
+
+            <datadir zip="true">
+            https://bruno1991.github.io/saile-repo/
+            </datadir>
+
+        </dir>
+
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Repositório oficial SAILE</summary>
+        <description>Repositório oficial do addon SAILE IPTV.</description>
+        <platform>all</platform>
+    </extension>
+
+</addon>
