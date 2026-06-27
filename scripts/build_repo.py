@@ -139,12 +139,14 @@ def build_addons_xml(addons):
     
     os.makedirs("zips", exist_ok=True)
     
-    with open(os.path.join("zips", "addons.xml"), "w", encoding="utf-8") as f:
+    with open(os.path.join("zips", "addons.xml"), "w", encoding="utf-8", newline='\n') as f:
         f.write(xml_content)
         
     m = hashlib.md5()
-    m.update(xml_content.encode('utf-8'))
-    with open(os.path.join("zips", "addons.xml.md5"), "w", encoding="utf-8") as f:
+    with open(os.path.join("zips", "addons.xml"), "rb") as f:
+        m.update(f.read())
+        
+    with open(os.path.join("zips", "addons.xml.md5"), "w", encoding="utf-8", newline='\n') as f:
         f.write(m.hexdigest())
 
 def push_to_github():
