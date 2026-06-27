@@ -2,7 +2,7 @@
 <addon
     id="repository.saile"
     name="SAILE Repository"
-    version="1.0.3"
+    version="1.0.4"
     provider-name="Bruno1991">
 
     <extension point="xbmc.addon.repository">
@@ -21,6 +21,9 @@
         <summary>Repositório oficial SAILE</summary>
         <description>Repositório oficial do addon SAILE IPTV.</description>
         <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
     </extension>
 
 </addon>
